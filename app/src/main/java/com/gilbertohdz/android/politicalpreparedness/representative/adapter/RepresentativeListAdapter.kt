@@ -3,17 +3,18 @@ package com.gilbertohdz.android.politicalpreparedness.representative.adapter
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.net.Uri
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gilbertohdz.android.politicalpreparedness.R
-import com.gilbertohdz.android.politicalpreparedness.databinding.ViewholderRepresentativeBinding
+import com.gilbertohdz.android.politicalpreparedness.databinding.ViewHolderRepresentativeBinding
 import com.gilbertohdz.android.politicalpreparedness.network.models.Channel
 import com.gilbertohdz.android.politicalpreparedness.representative.model.Representative
 
-class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewHolder>(RepresentativeDiffCallback()){
+class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewHolder>(RepresentativeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
         return RepresentativeViewHolder.from(parent)
@@ -25,11 +26,12 @@ class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewH
     }
 }
 
-class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding): RecyclerView.ViewHolder(binding.root) {
+class RepresentativeViewHolder(val binding: ViewHolderRepresentativeBinding): RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Representative) {
-        binding.representative = item
-        binding.representativePhoto.setImageResource(R.drawable.ic_profile)
+        // TODO: Set representative value
+        // binding.representative = item
+        // binding.representativePhoto.setImageResource(R.drawable.ic_profile)
 
         //TODO: Show social links ** Hint: Use provided helper methods
         //TODO: Show www link ** Hint: Use provided helper methods
@@ -41,14 +43,17 @@ class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding): Re
 
     private fun showSocialLinks(channels: List<Channel>) {
         val facebookUrl = getFacebookUrl(channels)
-        if (!facebookUrl.isNullOrBlank()) { enableLink(binding.facebookIcon, facebookUrl) }
+        // TODO: Set social media facebook
+        // if (!facebookUrl.isNullOrBlank()) { enableLink(binding.facebookIcon, facebookUrl) }
 
         val twitterUrl = getTwitterUrl(channels)
-        if (!twitterUrl.isNullOrBlank()) { enableLink(binding.twitterIcon, twitterUrl) }
+        // TODO: Set social media twittr
+        // if (!twitterUrl.isNullOrBlank()) { enableLink(binding.twitterIcon, twitterUrl) }
     }
 
     private fun showWWWLinks(urls: List<String>) {
-        enableLink(binding.wwwIcon, urls.first())
+        // TODO: Set web intent icon
+        // enableLink(binding.wwwIcon, urls.first())
     }
 
     private fun getFacebookUrl(channels: List<Channel>): String? {
@@ -74,8 +79,28 @@ class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding): Re
         itemView.context.startActivity(intent)
     }
 
+    companion object {
+        fun from(parent: ViewGroup) : RepresentativeViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = ViewHolderRepresentativeBinding.inflate(layoutInflater, parent, false)
+            return RepresentativeViewHolder(binding)
+        }
+    }
 }
 
-//TODO: Create RepresentativeDiffCallback
+// DINE: Create RepresentativeDiffCallback
+class RepresentativeDiffCallback : DiffUtil.ItemCallback<Representative>() {
+    override fun areItemsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+        return oldItem.office.name == newItem.office.name &&
+                oldItem.official.name == newItem.official.name
+    }
+
+    override fun areContentsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+        return oldItem == newItem
+    }
+}
 
 //TODO: Create RepresentativeListener
+class RepresentativeListener(val block: (Representative) -> Unit) {
+    fun onClick(representative: Representative) = block(representative)
+}
