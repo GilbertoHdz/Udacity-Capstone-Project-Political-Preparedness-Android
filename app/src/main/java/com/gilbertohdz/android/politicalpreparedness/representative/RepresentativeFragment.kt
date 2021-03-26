@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.gilbertohdz.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.gilbertohdz.android.politicalpreparedness.network.models.Address
+import kotlinx.android.synthetic.main.fragment_representative.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Locale
 
@@ -36,7 +38,16 @@ class DetailFragment : Fragment() {
 
         //TODO: Establish button listeners for field and location search
 
+        val address = Address("1886  Bridge Street", "", "Fort Smith", "Oklahoma", "72901")
+        viewModel.getRepresentatives(address)
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.representatives.observe(viewLifecycleOwner, Observer { representatives ->
+            val test = "";
+        })
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

@@ -32,6 +32,7 @@ class PoliticalApp : Application() {
             }
             viewModel {
                 RepresentativeViewModel(
+                        get(),
                         get()
                 )
             }
