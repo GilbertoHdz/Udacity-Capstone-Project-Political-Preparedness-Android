@@ -3,6 +3,7 @@ package com.gilbertohdz.android.politicalpreparedness
 import android.app.Application
 import com.gilbertohdz.android.politicalpreparedness.election.ElectionsViewModel
 import com.gilbertohdz.android.politicalpreparedness.election.VoterInfoViewModel
+import com.gilbertohdz.android.politicalpreparedness.representative.RepresentativeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
@@ -20,10 +21,14 @@ class PoliticalApp : Application() {
                 ElectionsViewModel(
                         get()
                 )
+            }
+            viewModel {
                 VoterInfoViewModel(
                         get()
                 )
-                ElectionsViewModel(
+            }
+            viewModel {
+                RepresentativeViewModel(
                         get()
                 )
             }

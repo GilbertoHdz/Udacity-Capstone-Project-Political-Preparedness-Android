@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.gilbertohdz.android.politicalpreparedness.database.ElectionDao
 
 class VoterInfoViewModel(
-        val app: Application
+        app: Application
 ) : ViewModel() {
 
     //TODO: Add live data to hold voter info

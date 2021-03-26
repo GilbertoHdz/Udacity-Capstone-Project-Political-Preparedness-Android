@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ElectionsFragment: Fragment() {
 
-    // TODO: Declare ViewModel
+    // DONE: Declare ViewModel
     private val viewModel: ElectionsViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater,
