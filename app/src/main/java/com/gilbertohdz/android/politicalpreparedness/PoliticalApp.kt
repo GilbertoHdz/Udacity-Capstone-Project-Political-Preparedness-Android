@@ -1,6 +1,9 @@
 package com.gilbertohdz.android.politicalpreparedness
 
 import android.app.Application
+import com.gilbertohdz.android.politicalpreparedness.database.LocalDB
+import com.gilbertohdz.android.politicalpreparedness.election.ElectionDataSource
+import com.gilbertohdz.android.politicalpreparedness.election.ElectionsRepository
 import com.gilbertohdz.android.politicalpreparedness.election.ElectionsViewModel
 import com.gilbertohdz.android.politicalpreparedness.election.VoterInfoViewModel
 import com.gilbertohdz.android.politicalpreparedness.network.provideCivicsApiService
@@ -39,7 +42,10 @@ class PoliticalApp : Application() {
 
             factory { provideMoshi() }
             factory { provideCivicsApiService(get()) }
+
             single { provideRetrofit(get()) }
+            single { ElectionsRepository(get(), get()) as ElectionDataSource }
+            single { LocalDB.createElectionDao(this@PoliticalApp) }
         }
 
         startKoin {

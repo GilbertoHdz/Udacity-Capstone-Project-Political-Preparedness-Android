@@ -1,19 +1,46 @@
 package com.gilbertohdz.android.politicalpreparedness.election
 
-import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.gilbertohdz.android.politicalpreparedness.network.models.Election
+import kotlinx.coroutines.launch
 
 //TODO: Construct ViewModel and provide election datasource
 class ElectionsViewModel(
-        app: Application
+        private val dataSource: ElectionDataSource
 ): ViewModel() {
 
-    //TODO: Create live data val for upcoming elections
+    // DONE: Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
 
-    //TODO: Create live data val for saved elections
+    // DONE: Create live data val for upcoming elections
+    val upcomingElections: LiveData<List<Election>> get() = dataSource.getElections()
+    // DONE: Create live data val for saved elections
+    val savedElections: LiveData<List<Election>> get() = dataSource.getSavedElections()
 
-    //TODO: Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
+    init{
+        refreshElections()
+    }
 
-    //TODO: Create functions to navigate to saved or upcoming election voter info
+    fun refreshElections(){
+        viewModelScope.launch {
+            dataSource.apply {
+                refreshElections()
+            }
+        }
+    }
 
+    // DONE: Create functions to navigate to saved or upcoming election voter info
+    private val _navigateToElectionDetail = MutableLiveData<Election>()
+    val navigateToElectionDetail
+        get() = _navigateToElectionDetail
+
+    fun onElectionItemClicked(election: Election) {
+        _navigateToElectionDetail.value = election
+    }
+
+    fun onElectionItemNavigated() {
+        _navigateToElectionDetail.value = null
+    }
 }

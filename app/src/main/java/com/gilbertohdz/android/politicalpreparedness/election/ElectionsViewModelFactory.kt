@@ -7,7 +7,7 @@ import java.lang.IllegalArgumentException
 
 // DONE: Create Factory to generate ElectionViewModel with provided election datasource
 class ElectionsViewModelFactory(
-        val app: Application
+        val app: ElectionDataSource
 ): ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
