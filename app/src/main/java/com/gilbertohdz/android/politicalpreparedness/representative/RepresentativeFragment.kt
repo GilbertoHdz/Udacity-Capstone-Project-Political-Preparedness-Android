@@ -42,9 +42,10 @@ class DetailFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, states)
         binding.state.adapter = adapter
 
-        //TODO: Populate Representative adapter
+        // DONE: Populate Representative adapter
         representativeAdapter = RepresentativeListAdapter()
         binding.representativeTitle
+        binding.representativeRecyclerView.adapter = representativeAdapter
 
         //TODO: Establish button listeners for field and location search
 
@@ -56,7 +57,7 @@ class DetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.representatives.observe(viewLifecycleOwner, Observer { representatives ->
-            val test = "";
+            representativeAdapter.submitList(representatives)
         })
     }
 

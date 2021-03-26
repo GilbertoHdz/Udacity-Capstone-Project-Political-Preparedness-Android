@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.gilbertohdz.android.politicalpreparedness.R
 import com.gilbertohdz.android.politicalpreparedness.databinding.ViewHolderRepresentativeBinding
 import com.gilbertohdz.android.politicalpreparedness.network.models.Channel
 import com.gilbertohdz.android.politicalpreparedness.representative.model.Representative
@@ -30,30 +31,29 @@ class RepresentativeViewHolder(val binding: ViewHolderRepresentativeBinding): Re
 
     fun bind(item: Representative) {
         binding.representative = item
-        // TODO: Set representative photo
-        // binding.representativePhoto.setImageResource(R.drawable.ic_profile)
+        binding.representativeItemImage.setImageResource(R.drawable.ic_profile)
 
-        //TODO: Show social links ** Hint: Use provided helper methods
-        //TODO: Show www link ** Hint: Use provided helper methods
+        // DONE: Show social links ** Hint: Use provided helper methods
+        // DONE: Show www link ** Hint: Use provided helper methods
+        item.official.channels?.let { showSocialLinks(it) }
+        item.official.urls?.let { showWWWLinks(it) }
 
         binding.executePendingBindings()
     }
 
-    //TODO: Add companion object to inflate ViewHolder (from)
-
     private fun showSocialLinks(channels: List<Channel>) {
         val facebookUrl = getFacebookUrl(channels)
-        // TODO: Set social media facebook
-        // if (!facebookUrl.isNullOrBlank()) { enableLink(binding.facebookIcon, facebookUrl) }
+        // DONE: Set social media facebook
+        if (!facebookUrl.isNullOrBlank()) { enableLink(binding.representativeItemFacebookIcon, facebookUrl) }
 
         val twitterUrl = getTwitterUrl(channels)
-        // TODO: Set social media twittr
-        // if (!twitterUrl.isNullOrBlank()) { enableLink(binding.twitterIcon, twitterUrl) }
+        // DONE: Set social media twittr
+        if (!twitterUrl.isNullOrBlank()) { enableLink(binding.representativeItemTwitterIcon, twitterUrl) }
     }
 
     private fun showWWWLinks(urls: List<String>) {
-        // TODO: Set web intent icon
-        // enableLink(binding.wwwIcon, urls.first())
+        // DONE: Set web intent icon
+        enableLink(binding.representativeItemWwwIcon, urls.first())
     }
 
     private fun getFacebookUrl(channels: List<Channel>): String? {
@@ -79,6 +79,7 @@ class RepresentativeViewHolder(val binding: ViewHolderRepresentativeBinding): Re
         itemView.context.startActivity(intent)
     }
 
+    // DONE: Add companion object to inflate ViewHolder (from)
     companion object {
         fun from(parent: ViewGroup) : RepresentativeViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
@@ -100,7 +101,7 @@ class RepresentativeDiffCallback : DiffUtil.ItemCallback<Representative>() {
     }
 }
 
-//TODO: Create RepresentativeListener
+// DONE: Create RepresentativeListener
 class RepresentativeListener(val block: (Representative) -> Unit) {
     fun onClick(representative: Representative) = block(representative)
 }
