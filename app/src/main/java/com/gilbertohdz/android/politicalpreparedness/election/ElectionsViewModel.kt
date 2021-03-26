@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gilbertohdz.android.politicalpreparedness.network.models.Election
+import com.gilbertohdz.android.politicalpreparedness.utils.SingleEvent
+import com.gilbertohdz.android.politicalpreparedness.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 //TODO: Construct ViewModel and provide election datasource
@@ -15,15 +17,16 @@ class ElectionsViewModel(
     // DONE: Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
 
     // DONE: Create live data val for upcoming elections
-    val upcomingElections: LiveData<List<Election>> get() = dataSource.getElections()
+    val upcomingElections = dataSource.upcomingElections
     // DONE: Create live data val for saved elections
-    val savedElections: LiveData<List<Election>> get() = dataSource.getSavedElections()
+    val savedElections: LiveData<List<Election>>
+     get() = dataSource.savedElections
 
     init{
         refreshElections()
     }
 
-    fun refreshElections(){
+    private fun refreshElections(){
         viewModelScope.launch {
             dataSource.apply {
                 refreshElections()

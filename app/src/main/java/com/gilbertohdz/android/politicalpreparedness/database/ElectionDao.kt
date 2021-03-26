@@ -12,10 +12,10 @@ interface ElectionDao {
 
     // DONE: Add insert query
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(elections: List<Election>)
+    suspend fun insertAll(elections: List<Election>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertElection(election: Election)
+    suspend fun insertElection(election: Election)
 
     // DONE: Add select all election query
     @Query("SELECT * FROM election_table")
@@ -26,7 +26,7 @@ interface ElectionDao {
 
     // DONE: Add select single election query
     @Query("SELECT * from election_table where id = :id")
-    fun getElectionById(id: Int): Election?
+    suspend fun getElectionById(id: Int): Election?
 
     // DONE: Add delete query
     @Query("DELETE FROM election_table where id=:id")

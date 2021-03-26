@@ -37,7 +37,7 @@ class ElectionsFragment: Fragment() {
             it?.let {
                 // clear the event
                 viewModel.onElectionItemNavigated()
-               this.findNavController().navigate(ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(it.id, it.division))
+               this.findNavController().navigate(ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(it))
             }
         })
 

@@ -30,6 +30,7 @@ class PoliticalApp : Application() {
             }
             viewModel {
                 VoterInfoViewModel(
+                        get(),
                         get()
                 )
             }

@@ -15,4 +15,12 @@
     <string name="representative_zip">Zip</string>
     <string name="representative_my_representatives">My Representatives</string>
     <string name="representative_find_my_representatives">Find My Representatives</string>
+
+    <string name="corresponding_address">Corresponding Address</string>
+    <string name="state_information">State Information</string>
+    <string name="ballot_information">Ballot Information</string>
+    <string name="voting_locations">Voting Locations</string>
+
+    <string name="btn_text_follow">Follow Election</string>
+    <string name="btn_text_unfollow">Unfollow Election</string>
 </resources>
