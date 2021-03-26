@@ -3,6 +3,9 @@ package com.gilbertohdz.android.politicalpreparedness
 import android.app.Application
 import com.gilbertohdz.android.politicalpreparedness.election.ElectionsViewModel
 import com.gilbertohdz.android.politicalpreparedness.election.VoterInfoViewModel
+import com.gilbertohdz.android.politicalpreparedness.network.provideCivicsApiService
+import com.gilbertohdz.android.politicalpreparedness.network.provideMoshi
+import com.gilbertohdz.android.politicalpreparedness.network.provideRetrofit
 import com.gilbertohdz.android.politicalpreparedness.representative.RepresentativeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -32,6 +35,10 @@ class PoliticalApp : Application() {
                         get()
                 )
             }
+
+            factory { provideMoshi() }
+            factory { provideCivicsApiService(get()) }
+            single { provideRetrofit(get()) }
         }
 
         startKoin {
