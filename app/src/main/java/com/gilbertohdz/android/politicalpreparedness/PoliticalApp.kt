@@ -23,6 +23,9 @@ class PoliticalApp : Application() {
                 VoterInfoViewModel(
                         get()
                 )
+                ElectionsViewModel(
+                        get()
+                )
             }
         }
 

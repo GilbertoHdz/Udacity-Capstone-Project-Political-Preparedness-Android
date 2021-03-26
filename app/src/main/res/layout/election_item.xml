@@ -2,7 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <variable
+            name="election"
+            type="com.gilbertohdz.android.politicalpreparedness.network.models.Election" />
 
+        <variable
+            name="electionListener"
+            type="com.gilbertohdz.android.politicalpreparedness.election.adapter.ElectionListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

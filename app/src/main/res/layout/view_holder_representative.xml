@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="representative"
+            type="com.gilbertohdz.android.politicalpreparedness.representative.model.Representative" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

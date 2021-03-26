@@ -5,21 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.gilbertohdz.android.politicalpreparedness.databinding.FragmentElectionBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ElectionsFragment: Fragment() {
 
     // TODO: Declare ViewModel
+    private val viewModel: ElectionsViewModel by viewModel()
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        //TODO: Add ViewModel values and create ViewModel
+        // DONE: Add ViewModel values and create ViewModel
 
         // DONE: Add binding values
         val binding = FragmentElectionBinding.inflate(inflater)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
         //TODO: Link elections to voter info
 

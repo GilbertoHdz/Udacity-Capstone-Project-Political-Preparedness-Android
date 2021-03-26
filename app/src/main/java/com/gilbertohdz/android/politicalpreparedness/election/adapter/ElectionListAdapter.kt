@@ -22,10 +22,14 @@ class ElectionListAdapter(
 }
 
 // DONE: Create ElectionViewHolder
-class ElectionViewHolder(binding: ElectionItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class ElectionViewHolder(val binding: ElectionItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(clickListener: ElectionListener, election: Election) {
+    fun bind(electionListener: ElectionListener, election: Election) {
+        binding.election = election
+        binding.electionListener = electionListener
 
+        // performance boost
+        binding.executePendingBindings()
     }
 
     companion object {

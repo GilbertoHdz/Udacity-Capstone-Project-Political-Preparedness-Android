@@ -29,8 +29,8 @@ class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewH
 class RepresentativeViewHolder(val binding: ViewHolderRepresentativeBinding): RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Representative) {
-        // TODO: Set representative value
-        // binding.representative = item
+        binding.representative = item
+        // TODO: Set representative photo
         // binding.representativePhoto.setImageResource(R.drawable.ic_profile)
 
         //TODO: Show social links ** Hint: Use provided helper methods
