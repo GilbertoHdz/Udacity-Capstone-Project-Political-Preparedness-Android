@@ -6,10 +6,13 @@ import android.location.Location
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.gilbertohdz.android.politicalpreparedness.R
 import com.gilbertohdz.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.gilbertohdz.android.politicalpreparedness.network.models.Address
+import com.gilbertohdz.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import kotlinx.android.synthetic.main.fragment_representative.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Locale
@@ -23,6 +26,8 @@ class DetailFragment : Fragment() {
     // DONE: Declare ViewModel
     private val viewModel: RepresentativeViewModel by viewModel()
 
+    private lateinit var representativeAdapter: RepresentativeListAdapter
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,9 +37,14 @@ class DetailFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        //TODO: Define and assign Representative adapter
+        // DONE: Define and assign Representative adapter
+        val states = resources.getStringArray(R.array.states)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, states)
+        binding.state.adapter = adapter
 
         //TODO: Populate Representative adapter
+        representativeAdapter = RepresentativeListAdapter()
+        binding.representativeTitle
 
         //TODO: Establish button listeners for field and location search
 
